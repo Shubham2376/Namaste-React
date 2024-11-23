@@ -1,5 +1,6 @@
 # Namaste React
-#                   --------Episode 1-----------
+#                   -----------------------Episode 1-------------------------
+
 # package.json is a configuration for npm
 # npm is a packages manager which manages all the packages that we will install in our system
 # to install npm we write this command -> init npm
@@ -43,7 +44,8 @@
 # package-lock.json contains the exact version of all the dependencies that my project ever needs
 # node_modules contains all the codes of it
 
-#                           ---------Episode 2-----------
+#                          ------------------------Episode 2-----------------------------
+
 # we will ignite our app how we will ignite our app we use parcel to ignite our app how we will do that we write command "npx install index.html" -> parcel create server(http://localhost:1234) for us and our app is available at that server. Now our code is hosted on localhost:1234 parcel is doing it for us parcel is created server for us and it was give to 1234 port for us to hosted our app in 1234 port.
 
 # just like npm we have npx. to intall the package we write npm but to exceute the package we write npx <package_name> <source_file_name> -> npx parcel index.html this means that we exceuting the parcel package
@@ -99,7 +101,7 @@ parcel doing HMR in all the files basically it reads all the files. How parcel i
 # By doing all of these we create production ready react app . This all things are present inside create-react-app
 
 
-# --------------------Episode 3------------------------
+#                                -----------------------Episode 3---------------------------
 
 # lets create a npm script so that we don't have to write everytime npx parcel index.html . it is a npm script so you need to create a npm script inside a package.json . in package.json there is section of script . we can create a different scripts we can create a script to start our project in dev mode or we can cretate a script to start our project in production mode.
 # lets create a script to start our project in dev mode for that we write "start" : "parcel index.html"
@@ -123,3 +125,219 @@ const parent = React.createElement("div",
 # above code is not a good way to create a browser element it is not a developer friendly when we have to make nested structure it look so clumsy so to make developer life easy facebook developer created something known as JSX what is JSX it is javascript syntax which helps to create react element easier 
 # JSX is not a part of react . JSX is different and react is different there is fundamental difference. a lot of people things that react can't be written in JSX but we can write React without JSX also but JSX make developer life easy that is why we use JSX 
 # what is JSX ? we used to write our markeup/skeleton of our project inside html file and logic is written in JavaScript file somewhere html and javascript file is related so libraries or frameworks even if react try to merge html and javascript file in to one file so JSX or even if in react is conventional where we merge this html and javascript together
+
+- we writing our code for both human and machine but first of all we write code for human then for machine because our code is read by a lot of developers . if we write code for machine then we would write it in binary we write code first of all for human
+- our js engine or browser engine only understand all the versions of ecmascript which is pure JavaScript so js engine doesn't understand this piece of code "const jsxHeading = <h1 id="heading">Namaste react using JSX</h1>" because this is not a pure javascript. then how this code working you know what parcel is doing the job behind the scenes .
+- the jsx code that we written this code transpiled(this code transform in to the code that react or browser can understand) before it going to the js engine and js engine recieved the code that browser understands. who is transpiled this code transpiled will be done by parcel is parcel do it itself no . parcel not do something itself it as cabinet of minister. parcel is like a manager it managee everything. parcel give the responsibility of transpilation to a package which is known as Babel(it is also a normal js package). parcel install Babel we don't install Babel . Babel is not created by facebook 
+- when we create tag using a pure react we use React.createElement this give us reactElement which is nothing but a js object when this js object render it is rendered as a html element
+- lets see how JSX works . behind the scenes JSX code is converted in to React.createElement => reactElement(js object) => render as html element. behind the scenes JSX code is React.createElement. that is why when we do console.log(heading) and console.log(jsxHeading) both are same . who convert our JSX Code into React.createElement , Babel is doing these job. once code convert in to React.createElement now react understands the code. if you want to see how babel convert JSX code into React.createElement go to babel website and write JSX code in its playground you see how babel convert it into React.createElement code . so babel is a transpiler . Babel is also a js compiler. Babel do lot of things . some older browsers don't understand Ecmascript code babel transpile Ecmascript code into code that older browsers understand. Babel is camp of converting one code into another code. Babel is js library or npm library which take some piece of code reads that piece of code and convert it in to something else 
+- lets prove that JSX code that we written "const jsxHeading = <h1 id="heading">Namaste react using JSX</h1>" is not a html code.
+in html when we have to give class name we write class = " " but in JSX code when we have to give class name we have to write className = " " when you go to console and see it there it seen as class = " " we write className = " " but there it is seen as class = " "
+- if you have to give attribute to JSX code you have to use camelCase syntax but in html code it don't be a case . so we write attribute in camelCase in jsx syntax but when we go to console and see it won't appear in camelCase it appear as it suppose it to be in html syntax i.e it appears in lowercase character
+- JSX syntax is very similar to html but it is not html
+
+- if JSX is in single line whic is "const jsxHeading = <h1 id="heading">Namaste react using JSX</h1>" this is perfectly valid jsx(you don't need to wrap inside a parenthesis it's not mandatory you can if you wish) suppose you want to write it in multiple lines you have to wrap it inside a parenthesis so that babel understands from where
+jsx code starts and where jsx code ends i.e (const jsxHeading = <h1 id="heading">
+                                        Namaste react using JSX
+                                        </h1>)
+
+------------------------------------React components-------------------------------
+- Everything in react is component if you see in webpage a header is component, a footer is component, a button is component, a search bar is component, a title is component, a input box is component, a list of cards is also a component
+- There are 2 components in react : 1.Class Based Component(it uses js class to write component) 2.Functional Based Component(it uses js function to write component)
+-Class Based Component is old way for writing code . Functional Based Component is new way for writing code. Now a days nowbody use class Based Component to write code . Today everyone use Functional Based Component to write code and make her app
+- all project in industries are write code using Functional Based Component but there are some legacy projects in industries in which code is written using class Based Component
+
+- React Functional Component is just a normal js function
+- when you create any react component , name it with first letter is capital letter otherwise you encounter a error its a react way to understand that it is a component
+- React Functional Component - it is normal js function which return some piece of jsx element.
+- A function which return jsx code is functional component(a javascipt function which returns react element)
+
+- This is react element :
+  const headingElement = (
+    <div id="container">
+       <h1 className = "heading" tabName = "1"> Hello React Element using jsx</h1>
+    <div>
+  );
+
+- This is react Component :
+    const HeadingComponent = () => (
+    <div id="container">
+       <h1 className = "heading" tabName = "1"> Hello React Element using jsx</h1>
+    <div>
+    );
+
+- do you see there is slight difference between react element and react component
+
+- To render a React Element we write this syntax:
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(headingElement);
+
+- To render a React Component we write this syntax:
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<HeadingComponent/>);  
+
+- How babel understands that it is a React Component when Babel see that inside angular bracket HeadingComponent is present then there must be HeadingComponent name component Exist there 
+
+- const HeadingComponent = () => (
+    <div id="container">
+       <h1 className = "heading" tabName = "1"> Hello React Element using jsx</h1>
+    <div>
+    );
+
+    above is react component we can write any function in above we write arrow function we can write normal function also when we write normal function we have to write return . In Industry arrow function is written to make react component
+
+    const HeadingComponent = function(){ 
+    return(
+    <div id="container">
+       <h1 className = "heading" tabName = "1"> Hello React Element using jsx</h1>
+    <div>
+        );
+    };
+
+
+----------------- Component Composition(composite component into one another)---------------------
+
+const ReactComponent2 = () => (       
+<h1 className="heading">Namaste React Functional Component2</h1>
+);
+
+const ReactComponent3 = () => (
+    <div id = "container"> 
+         <ReactComponent2/> 
+         //if i want to render ReactComponent2 component inside this div we write inisde a angular bracket beacuse then only babel know that it is a React Component when you write this <ReactComponent2/> all of code that are present inside ReactComponent2 replaced by this . browser doesn't know that we have ReactComponent2 or ReactComponent3 and it doesn't know that ReactComponent2 is inside ReactComponent3 babel do all transpilation step and convert all of these in to normal react code and then react rendering into html code that browsers understands . browsers doesn't care what component are there what component inside another component it just need to html to render 
+        <h1 className="heading">Namaste React Functional Component3</h1>
+    </div>
+);
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<ReactComponent3/>) // this root.render convert eveything into html then browser rendering it
+
+
+- ---------------------------------------------------------------
+
+- if you write anywhere curly brace { } inside a jsx . you can write any js expression inside this curly brace { } you can write any js code inside this curly brace that is why i said jsx is mix of html and javascript
+
+    const number = 1000;
+    const ReactComponent3 = () => (
+        <div id = "container"> 
+            {number}     //as we see that we write js inside { }
+            <h2>{number}</h2>  // we can put { } inside h2 tag also here we mix html and javascript
+            {100 + 200}  // we can write any js code inside { } here we see that we write arithmetic calculation code
+            {console.log("aaaaaaaaaaaafff")}
+            <h1 className="heading">Namaste React Functional Component3</h1>
+        </div>
+    );
+
+- you can inject any javascript code inside jsx with the help of { } and it comes down as html. jsx have such a super power which is using javascript inside it. using javascript inside jsx is such a powerful thing
+
+
+---------------------put react element inside a react component---------------------------
+
+
+    const jsxHeading = (
+        <h1 id="heading" className="hello" tabIndex = "1">
+            Namaste react using JSX
+        </h1>
+        );  //jsxHeading is react element
+    
+        const ReactComponent3 = () => (
+        <div id = "container"> 
+            {jsxHeading}  //at the end of day if we see that jsxHeading is normal javascript variable to put normal javascript varaiable inside the jsx i can write that js variable name which is jsxHeading inside the { } everything present inside jsxHeading element comes here (go and see in browser Element window) Babel converting all these in to react code which further render in to html which browsers understand
+
+            {number}
+            <h2>{number}</h2>
+            {200 + 300}
+            {console.log("ahddddf")}
+            <ReactComponent2/> 
+            <h1 className="heading">Namaste React Functional Component3</h1>
+        </div>
+    );
+
+------------put react element inside a another react element then put that react element inside a react component---------
+
+const elem = <span>This is react element</span>
+
+const jsxHeading = (
+        <h1 id="heading" className="hello" tabIndex = "1">
+            {elem} // as we see that we put react element named as elem inside a another react element jsxHeading
+            Namaste react using JSX
+
+            <ReactComponent3/> // if we write this give error on browser window that cannot access "ReactComponent3" before intialization
+        </h1>
+        );  //jsxHeading is react element
+    
+        const ReactComponent3 = () => (
+        <div id = "container"> 
+            {jsxHeading}
+            {number}
+            <h2>{number}</h2>
+            {200 + 300}
+            {console.log("ahddddf")}
+            <ReactComponent2/>
+            <ReactComponent2></ReactComponent2> // these is equivalent to <ReactComponent2/> it is only a conventional
+            <h1 className="heading">Namaste React Functional Component3</h1>
+        </div>
+    );
+
+    if we put "ReactComponent3" which is component inside a "jsxHeading" element it in browser window we see error which say that cannot access "ReactComponent3" before initialization this error came because at the end of day it is all javascript(the code we write which is react code at the end of day it is javascript) can you use const variable before initialization it no so that is why it give error so we have to write "jsxHeading" below of "ReactComponent3" then it doesn't give error so you need to maintain order because it is not react to do that it is javascript who not allow to that 
+
+    if we put "jsxHeading" below the "ReactComponent3" and then if we put "ReactComponent3" component inside a "jsxHeading" element by writing <ReactComponent3/> inside the "jsxHeading" then it went it to in the infinite loop(browser go infinite loop i.e browser became hang or freeze now) because i put "jsxHeading" element inside "ReactComponent3" component and "ReactComponent3" component inside a "jsxHeading" element. we create infinite loop inside html we kind of writing html but we create infinite loop inside html how cool it is na
+
+    - don't put div inside h1 it is considered as a bad html put h1 inside inside div
+
+
+    -----------------------------------------------------
+
+        const data = api.getData(); // these code that we written here api.getData() it is not a code it is written for understanding purposes only . suppose the api is malacious api (usually api is not malacious api we consider for the sake of discussion) attacker sending malacious code as we know whatever js is present inside data variable is exceuted below inside the react component("ReactComponent3") by writing {data} inside the react component over here js actually executing that piece of code .
+        These app is present in user computer. so whatver malicious things present in data variable can run in our browser or in our computer. if attacker get access to run any js code in our browser then what attacker can do . This type of attack is known as cross-site scripting attack. if attacker execute some js code in our browser then it can steal our cokkies, it read our local storage information, it can get sessions storage information, it can get information about our laptop.JSX is so amazing that it takes care of all these injections attacks even if api sends some malicious data JSX sanitize that data when any js code is wrap inside {} browser won't blindly run it JSX sanitize our data then it pass it . JSX prevents cross-site scripting attacks for you. you don't have to take care attack feel free to use whatever you wish to. nobody can do malicious attack using this lopehole you can execute any js without any fear. JSX taking care of all of these things
+
+        const ReactComponent3 = () => (
+            <div id = "container"> 
+                {data} 
+                <h1 className="heading">Namaste React Functional Component3</h1>
+            </div>
+        );
+
+    ---------------------------------------------------------------
+
+    - when we have to compose a react component 1 inside another react component 2 then we write this syntax inside a react component 2 which is <react component 1 name/> we can also write this <react component 1 name ></react component 1 name> syntax also both are same it is just a conventional 
+    <react_component1_name/> is equivalent to <react_component1_name></react_component1_name>
+
+    ----------------------------------------------------------------
+
+    - as we know functional component is normal js functions at the end of the day and we know that we can write any js code inside { } so can i call the js function inside { } i can 
+
+    const ReactComponent2 = () => (               
+    <h1 className="heading">Namaste React Functional Component2</h1>
+    );
+    const ReactComponent3 = () => (
+        <div id = "container">
+            {ReactComponent2()} // as we see we call ReactComponent2 inside the { } because ReactComponent2 is a react component which is js functions at the end of the day. if you don't want to call the function jsx give you another way to execute it which is <ReactComponent2/> or <ReactComponent2></ReactComponent2>
+
+            <ReactComponent2/> 
+            <ReactComponent2></ReactComponent2>
+            {jsxHeading} 
+            {number}
+            <h2>{number}</h2>
+            {200 + 300}
+            {console.log("ahddddf")}
+            <h1 className="heading">Namaste React Functional Component3</h1>
+        </div>
+    );
+
+    so this 3 thing {ReactComponent2()} , <ReactComponent2/> , <ReactComponent2></ReactComponent2> is one of the same thing 
+
+- what make your webapp code readable or faster your code is readable because you are writing jsx . jsx is not react . if your code is readable it doesn't mean that react make it readable jsx make it readable . if you make above code by using React.createElement you feel that it's so messy jsx make your code readable not react.
+
+
+
+#                   -------------------------------------EPisode 4---------------------------------
+
+
+
+
+
+
+
+    

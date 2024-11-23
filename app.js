@@ -78,16 +78,76 @@ episode-3 */
 
 // -----------Episode-3-----------
 
+// creating h1 tag using react(creating react element using core react)
 //React.createElement => object => HTMLElement(render)
-// const heading = React.createElement("h1",
-//     {id:heading},
-//     "i am h1 tage"
-// );
+
+const heading = React.createElement("h1",
+    {id:"heading"},
+    "i am h1 tag"
+);
+console.log(heading);
 // const root = ReactDOM.createRoot(document.getElementById("root"));
 // root.render(heading);
 
 
+
 // JSX 
 
-// lets create h1 tag using JSX
-const jsxHeading = <h1>Namaste react using JSX</h1> //by seeing this alot of people thing that we write html inside javascript but JSX is not html inside javascript
+// lets create h1 tag using JSX(creating react element using JSX)
+// ---------React Element-------------------
+const elem = <span>This is react element</span>
+
+const jsxHeading = (
+    <h1 id="heading" className="hello" tabIndex = "1">
+        {elem}
+        Namaste react using JSX
+    </h1>
+    ); //by seeing this alot of people thing that we write html inside javascript but JSX is not html inside javascript. jsx is not html , jsx is html like syntax.jsx is different , html is different , react is different . jsx is html like or xml like
+// the code that we written here is much more cleaner than above code
+
+// <h1>Namaste react using JSX</h1> this piece of code is jsx when this piece of code is executed this becomes react element . jsx is just the syntax react element is object . these piece of code is equivalent to above code (in which we create react element using core react)
+
+console.log(jsxHeading);
+// when we console heading and jsxHeading you see that both are exactly same
+
+
+// ------------React Component----------------
+
+// React Functional Component(it is normal js function which return some piece of jsx element)
+
+/*
+const ReactComponent = () => {
+    return <h1 className="heading">Namaste React Functional Component</h1> //this is how we return jsx element
+};
+*/
+
+// above and below react components both are same 
+const ReactComponent2 = () => (               //as we go to multiple lines so that we enclose it in a parenthesis
+<h1 className="heading">Namaste React Functional Component2</h1>
+);
+
+const number = 1000;
+// jsx can be nested also
+const ReactComponent3 = () => (
+    <div id = "container">
+        {ReactComponent2()}
+        {jsxHeading} 
+        {number}
+        <h2>{number}</h2>
+        {200 + 300}
+        {console.log("ahddddf")}
+        <ReactComponent2/> 
+        <ReactComponent2></ReactComponent2>
+        <h1 className="heading">Namaste React Functional Component3</h1>
+    </div>
+);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+//  Babel transpiled a code so that react and browser engine understand it . React understands because as we see her we pass jsxHeading in to render function(this comes in ReactDOM) will your ReactDOM understand this jsx code(in jsxHeading) no , so what happens it this code transpiled before it reaching there who transpiled our code, parcel will do this transpilation for us . is parcel do it itself no parcel use Babel package to do this transpilation
+
+// This is a way to render React Element to a page
+root.render(jsxHeading);
+
+// This is a way to render React Component to a page
+root.render(<ReactComponent3/>)
