@@ -334,7 +334,344 @@ const jsxHeading = (
 
 #                   -------------------------------------EPisode 4---------------------------------
 
+- whenever you asked to build any app the first thing as a senior engineer you think what you should do it's our planning if your planning is good code is very easy to write 
 
+planning steps:
+    step 1:-  you should exactly know what you are going to build and what is process of building it and how it look in the planning first thing is UI (how app look like) first of all we do that planning and then we start writing code for that don't just blindly writing code what lot of people do they want to make header they start coding header or they want to make resaturant card they start making it . first of all we have to make planning . build wireframe do planning 
+
+    let us do low level planning how my app look like . once you exactly know how my app looks like lets discuss what components can my app have . we divided our app in to three pieces Header,Body and Footer so we have these three components .Inside Header component we have Logo component, we have navigation item component. Inside Body component we have search Bar component, we have resturantContainer component inside resturantContainer we have Restaurant card. Inside Footer component we have copyright,address, links,contact
+
+    Header
+        - Logo
+        - Navigation item
+    Body
+        - Search
+        - resturantContainer
+            - resturantCard
+    Footer
+        - copyright
+        - address
+        - links
+        - contact
+
+    lets build our app. first of all i make a top level component(named as appLayout component) where all the app components reside . we build appLayout component as we know component is normal js function which return some jsx code(at the end it is div which component return it contain all the things which our app want) 
+
+    in html we write inline css like this 
+    <div class = "root" style = "width:100px">
+        <h1> Not rendered </h1>
+    </div>
+
+    but in react we don't write inline css like this . style attribute in react don't take like how to used to take inside html over here style taken as js object basically style take js object we know when we use any js inside jsx we enclose it inside { } . whenever you have to give inline style you have to give it as a js object.Inline style is not preffered way to write code 
+
+    const stylecard = {
+    backgroundColor:"yellow",
+    }
+    const ResturantCard = () => {
+        return (
+            <div className="res-card" style = {stylecard}>
+                <h3>meghana food</h3>
+            </div>
+        );
+    };
+
+    Beauty of jsx that we writing css inside jsx eariler we see that we write html inside jsx 
+
+    In react we have something known as props . props is shortform of properties. properties is something which we want to pass to a component. suppose i want to pass some data dynamically to a component. how we can do that we can pass it as a props. As we know what functional component at the end of the day its a normal javascript function similarly props at the end of the day are just normal arguments to a function
+
+    when i say i pass props to a component it is a exactly like saying i am passing some arguments to a function
+    
+    when you have to pass dynamically some data to a component passing it as a props 
+
+    <ResturantCard resName="meghana food" cuisine="Biryani,North Indian, Asia" Rating="4.4" Time="38 minutes"/> 
+    here as we see resName,cuisine,Rating and Time are the props(attributes or properties). In the react world these are called passing props to the component 
+    what react do is it take all these resName,cuisine,Rating and Time properties(props) and it will wrap inside a object and it pass to the component as a props 
+
+        const ResturantCard = (props) => {
+        console.log(props); // if we go to the console window we see that 2 different object . props are a object over here
+        return (
+            <div className="res-card" style = {stylecard}>
+                <img alt ="res-logo" className = "res-logo" src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_292,h_300/TopPicks/MoMiPizVeg"/>
+                <h3>{props.resName}</h3> // as props is an js object and you remember how can it used that we just wrap inside it in { }. we do it so that our card becomes dynamic 
+                <h4>{props.cuisine}</h4>
+                <h4>{props.Rating}</h4>
+                <h4>{props.Time}</h4>
+            </div>
+        );
+    };
+        const Body = () => {
+        return (
+            <div className="body">
+                <div className = "search">search</div>
+                <div className = "resturantContainer"> 
+                    <ResturantCard resName="meghana food" cuisine="Biryani,North Indian, Asia" Rating="4.4" Time="38 minutes"/>
+                    <ResturantCard resName="KFC" cuisine="Burger,Fast food" Rating="4.5" Time="40 minutes"/>
+                </div>
+            </div>
+        );
+    };
+
+    what react do it . react make object of all the props and pass to it to the component . what some react developers do is instead of writing props they "destructing on the fly" so after doing destructing on the fly above code looks like 
+
+    const ResturantCard = ({resName,cuisine,Rating,Time} //as we see here we do destructing on fly react bind all of the props and passing to this function and here we do destructing on fly this destructing on fly is not in react it is in js this is js this thing not done by react) => {
+        console.log(props);
+        return(
+            <div className="res-card" style = {stylecard}>
+                <img alt ="res-logo" className = "res-logo" src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_292,h_300/TopPicks/MoMiPizVeg"/>
+                <h3>{resName}</h3> // as we see after destructing on fly our code is more readable than above code 
+                <h4>{cuisine}</h4>
+                <h4>{Rating}</h4>
+                <h4>{Time}</h4>
+            </div>
+        );
+    };
+        const Body = () => {
+        return (
+            <div className="body">
+                <div className = "search">search</div>
+                <div className = "resturantContainer"> 
+                    <ResturantCard resName="meghana food" cuisine="Biryani,North Indian, Asia" Rating="4.4" Time="38 minutes"/>
+                    <ResturantCard resName="KFC" cuisine="Burger,Fast food" Rating="4.5" Time="40 minutes"/>
+                </div>
+            </div>
+        );
+    };
+
+    we can destructing also like this:
+    const ResturantCard = (props) => {
+        const {resName,cuisine,Rating,Time} = props; //this is also a way to destructing on fly 
+        console.log(props);
+        return(
+            <div className="res-card" style = {stylecard}>
+                <img alt ="res-logo" className = "res-logo" src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_292,h_300/TopPicks/MoMiPizVeg"/>
+                <h3>{resName}</h3> 
+                <h4>{cuisine}</h4>
+                <h4>{Rating}</h4>
+                <h4>{Time}</h4>
+            </div>
+        );
+    };
+        const Body = () => {
+        return (
+            <div className="body">
+                <div className = "search">search</div>
+                <div className = "resturantContainer"> 
+                    <ResturantCard resName="meghana food" 
+                    cuisine="Biryani,North Indian, Asia" 
+                    Rating="4.4" 
+                    Time="38 minutes"/>
+                    <ResturantCard resName="KFC" cuisine="Burger,Fast food" Rating="4.5" Time="40 minutes"/>
+                </div>
+            </div>
+        );
+    };
+
+    In reality the data is not like this 
+    resName="meghana food" 
+    cuisine="Biryani,North Indian, Asia" 
+    Rating="4.4" 
+    Time="38 minutes"
+    how this resturant data from backend came to us. It came in the form of JSON 
+
+
+                                 ------------------Config Driven UI-----------------------
+
+    when you open swiggy site you see some offer is display on her site and that offer is in our city . In some other city these offer are different . crausles are different in different different city so how can you build a UI like that will you build a different webiste for delhi, for mumbai,for banglore obviously no . our webiste is driven by data so these are known as config driven ui . our webiste is driven by config. what basically config driven ui means controlling our ui(how ui look) using config(data). where config come from config comes from backend . what is config that api in backend from where data comes from. we written ui once and according to data comes from backend my ui change
+
+
+        const ResturantCard = (props) => {
+        console.log(props); // by console.log we can see that api which we take from backend
+
+        // const {resName,cuisine,Rating,Time} = props;
+        const {resData} = props;
+        // now from resData we can use the data which is present inside resObj data which came from backend api of swiggy
+        console.log(props);
+        return (
+            <div className="res-card" style = {stylecard}>
+                <img alt ="res-logo" className = "res-logo" src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_292,h_300/TopPicks/MoMiPizVeg"/>
+                <h3>{resData.info.name}</h3>
+                <h4>{resData.info.cuisines}</h4> // cuisines are array in api if we write in this way resData.info.cuisines then all the array element comes without comma separated jabki array element are comma separated so if we want that array element comes in comma separated way then we use js concept here there is propertu on array array_name.join(',') it separate array element in comma separated way
+                <h4>{resData.info.avgRating}</h4>
+                <h4>{resData.info.costForTwo}</h4>
+                <h4>{resData.info.avgRating}</h4>
+            </div>
+        );
+    };
+        const resObj = {
+            kfc resturant api from backend
+        };
+
+        const Body = () => {
+        return (
+            <div className="body">
+                <div className = "search">search</div>
+                <div className = "resturantContainer"> 
+                    <ResturantCard 
+                        // will i keep passing data one by one no our head will be messed up because imagine if we have so many data
+                    // resName="meghana food" 
+                    // cuisine="Biryani,North Indian, Asia" 
+                    // Rating="4.4" 
+                    // Time="38 minutes"
+
+                        // we pass like this i.e we pass the js object
+                    resData = {resObj} // i have to pass js object so we enclose it in { }
+                    />
+                </div>
+            </div>
+        );
+    };
+
+    cloudinaryImageId is in seen in backend api . what is cloudinary it is CDN when we build large scale applications you put all images in CDN. so swiggy use cloudinary to host all of the images here
+    This is image url of KFC in swiggy site : https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_366/RX_THUMBNAIL/IMAGES/VENDOR/2024/11/5/5d695f6a-7fc1-45d6-ae8f-c5986b904b34_584332.JPG
+
+    cloudinaryImageId of burger king in swiggy backend api : RX_THUMBNAIL/IMAGES/VENDOR/2024/8/9/24badc96-e293-444e-be18-52d5f5ae9b74_78041.jpg
+
+    so to get image url of burger king which uploaded in swiggy site just replace cloudinaryImageId of KFC with cloudinaryImageId of burger king i.e https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_366/RX_THUMBNAIL/IMAGES/VENDOR/2024/8/9/24badc96-e293-444e-be18-52d5f5ae9b74_78041.jpg
+
+    so general URL of image in swiggy site : 
+    https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_366/cloudinaryImageId_given_in_swiggy_api
+
+    i have to add cloudinaryImageId for each resturant at the end of the this url https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_366/ add(append) is a js operation so we have to wrap it inside a { }
+    i.e <img alt ="res-logo" className = "res-logo" src= {"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_366/" + resData.info.cloudinaryImageId}/> 
+    // here concatenation of two strings occur resData.info.cloudinaryImageId this give us string 
+    resData.info.cloudinaryImageId this is different for different resturant but the url link remains the same for all 
+
+
+    The data which come from backend in real world it is array of object . data will be list of objects and each object represents a resturant so we take list of objects(array of objects) from backend and pass it one by one 
+
+    now our ResturantCard become dynamic
+
+        const ResturantCard = (props) => {
+        console.log(props);
+
+        // const {resName,cuisine,Rating,Time} = props;
+        const {resData} = props;
+        // now from resData we can use the data which is present inside resObj data which came from backend api of swiggy
+        
+        return (
+            <div className="res-card" style = {stylecard}>
+                <img alt ="res-logo" className = "res-logo" src= {"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_366/" + resData.info.cloudinaryImageId}/>
+                <h3>{resData.info.name}</h3>
+                <h4>{resData.info.cuisines.join(',')}</h4>
+                <h4>{resData.info.avgRating}</h4>
+                <h4>{resData.info.costForTwo}</h4>
+                <h4>{resData.info.sla.deliveryTime + " mins"}</h4>
+            </div>
+        );
+    };
+
+        const resList = [ list of objects ];
+
+        const Body = () => {
+        return (
+            <div className="body">
+                <div className = "search">search</div>
+                <div className = "resturantContainer"> 
+                    // as we see that we pass one by one
+                    <ResturantCard resData = {resList[0]} />
+                    <ResturantCard resData={resList[1]}/>
+                    <ResturantCard resData={resList[2]}/>
+                    <ResturantCard resData={resList[3]}/>
+                    <ResturantCard resData={resList[4]}/>
+                    <ResturantCard resData={resList[5]}/>
+                    <ResturantCard resData={resList[6]}/>
+
+                    // when we see output you would be amazed this is a beauty of writing reusable components. when we build production ready app you have to write reusable components. just because we create a reusable component we are able to pass it dynamic props inside that 
+                </div>
+            </div>
+        );
+    }; 
+
+                            --------- clean version of above code -----------------------
+
+    The code that we write above is messy code let's clean up the messyness that we do above . this is resData.info.avgRating
+    not a good practice to write this is complicated UI .this looks messy . so the good practice is to destructure this. we gonna don't write resData.info again and again we destructure this . as we get rid of  resData.info.cuisines, resData.info.avgRating,resData.info.costForTwo, resData.info.avgRating,resData.info.name and instead of this we want to write cuisines,avgRating,costForTwo,avgRating,name so here we use optional chaining while we destructuring this . as we destructing more than one thing so we do optional chaining here
+    so clean code looks like this:
+
+    const ResturantCard = (props) => {
+        const {resData} = props;
+        const {name,cuisines,avgRating,costForTwo,cloudinaryImageId,deliveryTime} = resData?.info // here we do destructing for cleaniness purposes. resData?.info as we see we use ? this is optional chaining 
+        return (
+            <div className = "res-card">
+                <img className = "res -logo" alt = "res-logo" src = {"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_366/" + cloudinaryImageId}/>
+                <h3>{name}</h3>
+                <h4>{cuisine.join(',')}</h4>
+                <h4>{avgRating}</h4>
+                <h4>{costForTwo}</h4>
+                <h4>{deliveryTime} mins</h4>
+            </div>
+        );
+    };
+
+    lets refactor/clean the body component of the code today we have 15 resturant which comes as data from the backend what if there are 20 what if there are 25 we don't know the count so we loop over array and create a card dynamically now above it write hardcoded.
+    How to loop resList for that we use javascript map function as we have to write js so we write inside { } we can also write for loop to looping over resList array but the best practice which is used in industry is to use functional programming(map,filter and reduce)
+
+    // now we don't need to worry the no of resturants(data) comes from backend 
+
+        const Body = () => {
+        return (
+            <div className="body">
+                <div className = "search">search</div>
+                <div className = "resturantContainer"> 
+                // here we use map function of js 
+                    {
+                    // inside my resList i am looping and for each resturant i am returning some piece of jsx 
+                    resList.map((resturant) => (
+                        <ResturantCard resData = {resturant}/>
+                    ))
+                    }
+                </div>
+            </div>
+        );
+    }; 
+
+    now when we see it render all the resturants which is present in the resList which is array which contains all the resturants which comes from the backend
+    we build the reusable resturant card component we using the same resturant card component for each resturant we build config driven ui
+
+# when react was build it was build with the fundamental that in js only we will build a markup as well as logic . eariler we have different html file for markup and different javascript file for logic . now we can write html and javascript inside the jsx and everything we do in the same place This is how beautiful the javascript is , JSX is and React is
+
+    when you see the console window of our browser you see the Warning: Each child in a list should have a unique "key" prop.
+    these warning give us by react . what does it mean- unique "key" property it means each of this items <ResturantCard resData = {resturant}/> should be uniquely represented. whenever you looping any list you have to given key property for each resturant we have unique id here we have to pass that unique id . so we will passs resturant id as a key over here 
+    <ResturantCard key = {resturant.info.id} resData = {resturant}/> so above body component code modified slightly. key is a reserved keyword which is used to uniquely identify something
+
+    const Body = () => {
+        return (
+            <div className="body">
+                <div className = "search">search</div>
+                <div className = "resturantContainer"> 
+                // here we use map function of js 
+                    {
+                    // inside my resList i am looping and for each resturant i am returning some piece of jsx 
+                    resList.map((resturant) => (
+                        <ResturantCard key = {resturant.info.id} resData = {resturant}/>
+                    ))
+                    }
+                </div>
+            </div>
+        );
+    }; 
+
+    now if you see that warning gone from the console
+    Always make a habit when you loop over something you always have to give key. WHY ?
+
+    Lets see why we always have to give key or why we need key 
+
+    we have resturantContainer and inside it we have so many children as a resturantCard component so what happens is react optimize its render cycle . when we have component of same level this are the components in which we loop this component should need to have unique id they should need to have uniquely represented why they need to be uniquely represented suppose the new resturant came in and they came in first place if you don't give id any of the resturant and incoming resturants as well so what will react do react re-render all the resturants card because react doesn't know which resturant card is new react doesn't uniquely identify this resturant card react re-render all the resturants card
+
+    if new resturant card come inside the resturant container react does not know at what place we have to put this resturant card whether it is coming on first place or second place or third place. react cleans the whole resturant container and re renders all the resturants card. react does not which resturant card new it will react all the resturants card same  
+    But if you give id to each resturant card and if new resturant card come with some id xyz suppose if we have resturants card1 with id1 and resturant card2 with id2 and resturant card3 with id3 and if new resturant card come with some id xyz
+    as it is unique now react exactly know that id1,id2 and id3 are already there the new resturant card come at a first place so it just render one resturant card it will not render all of the resturant card this is the huge optimization while you writing code.
+    suppose you build infinite scrolling , resturant page in which 100 of resturants card in the page think about everytime react re render it will re render all the 100 resturants everytime its a bad thing. so that is why we need to uniquely identify the each loop item or list item
+
+    so whenever you are in the loop or whenever you use map make a habit to use key. it take big performance hit if you don't have write key
+
+    some people also use indexes as the key . whenever you do map,reduce,filter there is a index like 0,1,2---- for each element and they keep updating and these index is the second property of map. some people say that you can use index as the key this logically looks right because everytime there is unique key for each resturant card But react itself says that never use index as the key(see official documentation of react).It won't complain to use index as the key but it's not recommended to use index as the key . If our data doesn't have id (data comes from backend does not have id) then you can use index as the id but it's not recommended to use
+
+    priority order:
+    not using key(not acceptable) <<< index as key <<< unique id(best practice)
+
+    if you don't have unique key then atleast use index it is better than using not key. not putting key is not acceptable
+
+    
 
 
 
