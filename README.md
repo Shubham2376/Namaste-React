@@ -671,10 +671,288 @@ planning steps:
 
     if you don't have unique key then atleast use index it is better than using not key. not putting key is not acceptable
 
+
+
+#                       ------------------------------------------Episode 5---------------------------------------
+
+    everything you do with react you can do same thing using normal html,css and javascript then why do we use react any framework whatever you can do with that you can do it by normal html,css and javascript. The beauty of using any library or framework is it make our developer experience easy it makes you write less code and do more on webpage This is more job of library or framework. At the end of the day react uses javascript behind the scenes.
+    React makes our coding experience very fast and also optimizing something on web page so that things happen very fast
+
+    from these episodes we start to see more super power of react
+
+    we are going to cover react hokes
+
+    before dive into react hokes we first of all clean our app . we wrote a app.js file and we create a lot of components and we wrote everything in to single file and because of that our app.js file become big so it is not good practice to keep such large files in our app. Best practice is to make separate file for separate components. we not write whole thing in app.js file we break down our app into multiple file 
+    right now we have all file in the root directory we basically start from starch and we kept everything in namaste react folder now let us restructing our app there is good convention in the industry all the main code of react library we generally kept it in the src folder we can build our whole app without src folder but we have to follow the industry standards 
+    all the source code of our app we will kept it in the src folder . so i kept my app.js file in the src folder
+
+    it is good practice to make separate files for separate components because the code we write is for humans for humans it is very logical to create separate files for separate components. our app can have 1000 components you can write the all components in the same file 
+    so the best practice is to create a component folder inside the src folder whatever component that i make inside my app.js i put it this component folder you can give folder name to any naming it is upon the maintance of the project what folder name that it was given. read react file structure official documentation
+
+    i will try to basic folder structure and as time as our app grow suppose our app has lot of components we will keep restructing that's the best way so don't overthink stating you are always restructing later
+
+    let us create a first component file header.js whenever you create a file for component try to name a file exactly what the component name was. try to match with the component name. so our file name would be Header.js if the file name is Header.js it would contain the header component . some people like to write the file name as Header.jsx .it's a personal choice but according to akshay using .js extension is good . you can use .jsx extension it hardly matters. jsx is js at the end of the day
+
+    so i put the code of Header component into the Header.js file . so if Header component is use in some other file react throw an error that Header is not defined. so for accessible Header component outside the Header.js file so i will import Header from Header.js file. In app.js we use Header component but now Header component is not present in app.js so because of this react throw an error so what we need to do now we have to import Header component from Header.js but before we import Header
+    component we need to export Header component from Header.js file for export Header component from Header.js we write this line at the end of Header.js file export default <component_name> -> export default Header;
+    now we can import it inside in app.js. for import in app.js file we have to write this line at the top of app.js file
+    import <component_name> from "path of that file in which that component is present" -> import Header from "./component/Header.js"; here we don't write file name with extension it also work i.e this also works -> import Header from "./component/Header"; react will treat it as js file at itself 
+    every project has different conventions
+
+    make ResturantCard file for ResturantCard component as i use ResturantCard component inside my Body so i import ResturantCard.js file inside Body.js as both these file are present inside same folder(are in same level) so we import it like this ./ResturantCard.js 
+
+    move resList in body.js then only resList present inside body.js can understands what is resList. this is not a good practice becasue whenever you have any hardcoded data you can never put it in a component file this is industry standard practice. resList is hardcoded data. so we don't put resList in body.js file because body.js file contain Body component. you can put react won't complaint but this is not a good practice. so i won't keep resList(hardcoded data) into our app i won't keep resList in body.js file 
+    similarly the url which is present inside ResturantCard.js which is cdn url we won't keep url inside ResturantCard.js file or inside in our app. url is also hardcoded string . if we see we have hardcoded string(url) inside Header.js . Never ever put hardcoded string inside our app . so where should we keep it so common practice is to keep inside a separate file that separate file known as config or utils or common. util means utility that will be use all accross our app . logo image can be used anywhere in our app . so i create utils folder and inside it i make constants.js inside it i put all the hardcoded strings. as we see that i name constants.js name in small letter because it is not a component .
+
+    anything we create here it's not mandatory it is good practice 
+
+    let's move all the constants things(hardcoded things like resList,cdn url, logo url) inside the constants.js file . it's a good practice to name all the constants in capital letter. i can put resList in to constant.js file let's make it separate file mockData.js and put resList inside it
+
+    why we name utils folder whatever is present inside this is use all accross our app
+
+    In body.js i have to import resList 
+
+    There are 2 types of export and import : default and named export 
+                                             default and named import 
+
+    named export is used when from one file you have to export multiple things . In one file you can write only one default export you can't write it twice so when you have to export multiple things you can' use default export . bydefault our file export one thing suppose you have to export multiple things then in that case you have to use named export 
+
+    how to use named export -> write export keyword before variable or something that you want to export
+
+    if you have to export multiple things from one file then you use named export 
+
+    if you want to import the named export you can write this -> import {named_export_variable_name} from "path_from_where_we_export"
+
+- Default export/import
+    export default <component_name>
+    import <component_name> from "path"
+
+- named export/import
+    export const component_variable = something
+    import {component_variable_name} from "path"
+
+
+    good practice is to use default export/import unless you have two things which you want to export 
+
+    can we use default export along with named export -> yes we can 
+
+    it's a standard practice to not keep our file content more than 100 lines . every file in our app should not exceed 100 line.if it exceed more than 100 lines then break it in to some more file
+
+
+Right now our website is static what do you mean by static right now we have no interaction with my app . lets make it dynamic . it is plane static website(it is read only website) . now we make our website dynamic or interactive 
+
+    lets build a feature when we click that feature(or button) it show top rated resturant. now we see that how we will do something on click of button 
+
+    when i click Top Rated Restaurant button my app show the top rated resturant(whose rating is above 4).How do i handle click handler when i click that button something can happen how can i do that. let's first see event handler how can i handle on click event 
+    I have to do something on click so in button i will pass onClick attribute and this onClick takes a callback function it is called after we click on that button . callback function is js so we wrap it inside a {} in jsx 
+    go to body.js and see it 
+        <div className = "filter">
+                <button className="filter-btn" onClick = {() => 
+                    {}}
+                >Top Rated Resturants</button>
+        </div>
+    whatver we pass inside this function after clicking when that function call it will be executed
+        <div className = "filter">
+                <button className="filter-btn" onClick = {() => 
+                    {console.log("Button Clicked")}}
+                >Top Rated Resturants</button>
+        </div>
+        it print Button Clicked on console after clicking the button () => {console.log("Button Clicked")} this is callback function which will be called when we click the button 
+        
+    This is how you add click handlers. you can add more event handler apart from onClick handler. you can also use onMouseHover event handler also 
+        <div className = "filter">
+                <button className="filter-btn" onMouseHover = {() => 
+                    {console.log("Button Clicked")}}
+                >Top Rated Resturants</button>
+        </div>
+        now whenever you hover cursor on Top Rated Resturants button then on console window you see Button Clicked text
+
+        you can put any event you wish to 
+
+        onclick the Top Rated Resturants button my resturant list should change there should be high rated resturants should visible to me . lets go to basic how this resturants card coming over here these resturants cards are coming from resList and this resList contain some mock data in it so suppose i want to show just 3 resturants cards i just have to change resList. our ui is config driven so if my resList change everything will be changed.our card is generated from resList so anything change in resList our webpage get changed 
+
+        onclick i have to do something so that i can filter out top rated resturants so basically i have to somehow write a filter logic inside the callback function i.e instead of writing console.log("Button Clicked") i have to write some filer logic over here 
+        <div className = "filter">
+                <button className="filter-btn" onMouseHover = {() => {
+                    // some filter logic so that on click of this button i need to filter out something
+                    }}
+                >Top Rated Resturants</button>
+        </div>
+
+
+        whenever you have react app you have 2 layer ui layer and data layer . the ui layer displayed what is sent by data layer 
+        suppose my listOfResturants modified to one resturant(one card) what will happen the ui will automatically shown one resturant 
+
+        as soon as we click Top Rated Resturants button our listOfResturants update to resturant whose average Rating is greater than 4.5 . we can see the modified/updated/filter listOfResturants(by doing console.log)after clicking the Top Rated Resturants button 
+
+            const Body = () => {
+            // this is normal js variable
+            let listOfResturants =[];  // this should be let variable otherwise further we can't modified listOfResturants
+            return (
+            <div className="body">
+                <div className = "search">search</div>
+                <div className = "filter">
+                <button className="filter-btn" onClick={() => 
+                    {
+                    listOfResturants = listOfResturants.filter(
+                        (res) => res.info.avgRating > 4.5
+                    );
+                    console.log(listOfResturants); 
+                    }
+                }
+                    >Top Rated Resturants</button>
+                </div>
+                <div className = "resturantContainer"> 
+                    {
+                    listOfResturants.map((resturant) => (
+                        <ResturantCard key = {resturant.info.id} resData = {resturant}/>
+                    ))
+                    }
+                </div>
+            </div>
+        );
+    };
+
+    if we change our code only this our data will be filtered but our ui cannot update . so basically if we think as my 
+    listOfResturants changes so my ui should automatically get changing (automatically my page should refreshed) how cool it will be instead of writing that logic This is the superpower that react has 
+    when we say react is fast react is fast in dom manipulation(efficient in dom manipulation). if you want to keep your ui and data layer tied consistent to each other this is were react comes in and all other frameworks apart from react . all these frameworks are trying to solve this that our ui and data layer work each other that if my data changes my ui also changes.This is the things that all the frameworks trying to solve. update dom efficiently 
+    why react is fast ? because react can do fast or efficient dom manipulation
+
+    Right now our listOfResturants change but my ui can't change according to that . React solve this problem . when i click that button my listOfResturants changes according to that so my ui also changes accordingly this is the exact problem that react solve . To do this react give you a super power right now listOfResturants is normal js variable but if you give super power of react it will become super energetic react variable . super powerful react variable it also called as state variable
+    how to create super powerful react variable for that we will use react hooks which is known as use state 
+
+# At the end of the day react hooks is normal js function which is given to us by react it's a pre build the only thing is that function comes with some super power that function comes with some logic written behind the scenes it's a utility function that react given to us . There are multiple such functions that react given to us so all those are react hooks 
+
+    facebook developer wrote that function which react given to us where they write it inside the react that you import when we do npm install react we got all these react utility functions inside my code 
+    How to use it . we will have to import these utility function(hooks)
+
+    There are 2 most important hooks:
+    - useState() : it is use to generate super powerful state variable in react
+    - useEffect()
+    There are multiple hooks in react but in most of time you will use this 2 hooks
+
+# Lets see how to use useState() hooks:
+    first of all you have to import useState() . you have to import it using named import by writing : import { useState} from "react"
+    when we able to import something it means somebody definitely export it from some file that why we are able to import it so above what we write that we import useState from react it means somebody definitely named export it from react 
+
+    useState hooks is used to make state variables. why it is called state variable because it maintains the state of our application 
+
+    How to use useState hooks it is used to create a state variable why it is called state variable because it maintains the state of our component. scope of local state variable is inside the component 
+
+    when you call the useState() hook it will give you state variable and how you recieve state variable inside the array 
+    const [listOfResturants] = useState() . now listOfResturants is super powerful react variable(state variable)
+
+    Normal js varaible:
+    let listOfResturants;
+
+    Local state variable:
+    let [listOfResturants] = useState();
+
+    whatever we pass inside the useState() they become the default value of state variable . so const [listOfResturants] = useState([]) now default value of listOfResturants is [] . if you want to give the list of resturants as default value you can pass it inside the useState and how to use listOfResturants state variable normally it behaves as normal varaible 
+
+    lets see how to modified this variable(state variable) suppose i want to modify the listOfResturants state variable you can't do this listOfResturants = []; How to modified it we modify the state variable by using function you can name anything to this function but the standard practice which use in industry that if state variable name is listOfResturants then our function name will be setlistOfResturants. basically you applied set before it . its not mandatory but it is normal nomenclature. This function is to use to update the state variable. How to update the state variable i will call the function and pass the new data that i want to insert(update) it to the state variable(which i want to push inside the state variable)
+
+    you can make normal variable like this and update it like this:
+        let list = []; //MAKING
+        list = ["ABC]; //UPDATION  
+            OR
+        const list = []; //MAKING
+        list.push("absf"); //UPDATION
+    you can make state variable like this and update it like this:
+        let [list,setlist] = useState([]) //MAKING a list and set a default value to empty list
+        setlist(["acse"]) // UPDATING the list state variable by setlist method 
+
+
+
+    import ResturantCard from "./ResturantCard";
+    import resList from "../utils/mockData";
+    import {useState} from "react";
+    const Body = () => {
+        const [listOfResturants,setlistOfResturants] = useState(resList)
+        return (
+            <div className="body">
+                <div className = "search">search</div>
+                <div className = "filter">
+                <button className="filter-btn" onClick={() => 
+                    {
+                    const filterdList = listOfResturants.filter(
+                        (res) => res.info.avgRating > 4.5
+                    );
+
+                    // by this we update the listOfResturants state variable data . we use setlistOfResturants function to update the data of  listOfResturants state variable data
+
+                    setlistOfResturants(filterList);
+
+                    }
+                }
+                    >Top Rated Resturants</button>
+                </div>
+                <div className = "resturantContainer"> 
+                    {
+                    listOfResturants.map((resturant) => (
+                        <ResturantCard key = {resturant.info.id} resData = {resturant}/>
+                    ))
+                    }
+                </div>
+            </div>
+        );
+    };
+    export default Body;
+
+    when we go to our page we can see all the resturants that are in resList are shown there why all resturants of resList are shown because we give a default value resList to listOfResturants state variable.
+    when i click the button of Top Rated Resturants it will create a filterdList and update the listOfResturants state variable so because of that as soon as we click the button our ui got filtered automatically bassed on filterdList
+
+    when i clicked that button state variable (listOfResturants) changes
+
+    so super powerful variable(state variable) keeps ui layer in sync with data layer . if listOfResturants is normal variable and if i update listOfResturants my ui can't updated .But if we have super powerful varaible(state varaible) it sync ui layer with data layer as soon as listOfResturants changes it will automatically refresh our component This is known as render In react term how do we call render whenever a state varaiable updates react re render the component. as soon as my data layer update my ui layer will automatically update how will it update by re rendering . As soon as my data layer updates react re render my component react do it very fast,very efficient and in very less code. This is why React is most popular library in world to build the ui application. How large scale application super fast what it makes it super fast React will make DOM operations super fast and efficient. The logic of updating the ui is known rendering this is were react is best .
+
+    from anywhere when setlistOfResturants calls our listOfResturants updates . react remove that body and updates it, react quickly do that it quickly update our ui . you can see it go to inspect -> elements and see as soon as we click that button the elements section changes . now only those elements(resturant card shown in inspect) which satisfy that condition.
+
+    as we see how much less code that we write to achieve the functionality. If you implement this feature by writing the js you have to write a tons of code but when we write code in react we see that we write less code  
+
+
+    why our webapp is fast or optimize The answer is not that react is minified our code ,bundling our code . React not do anything of this . React is only good for DOM manipulation or DOM operation. How react do this 
+
+    How React works behind the scenes (what is react algorithm) React use something known as Reconcilation algorithm It is also known as React fiber . in our ui we have DOM . suppose we have res-container and inside it we have 7 resturant card and suppose my ui changes to filering this 7 cards into 3 cards . what react do and why react fast. whereever this ui(7 resturant card) present react create virtual dom of it . Virtual Dom is not a actual dom .actual dom is a tag
+    This is actual Dom 
+    <div>
+        <div>
+            <img>
+    Virtual Dom is a representation of actual Dom what do you mean by actual dom .Do you remember that React.createElement return the React Element which is object similarly when you have big structure it is all an object . As body is big structure so how react treats this body jsx react create object of it we can also see it lets console body component write console.log(<Body/>) inside the app.js 
     
+        const AppLayout = () => {
+        // see console window you see object and this object is react virtual dom 
+        console.log(<Body/>); 
+        return (
+            <div className="app">
+                <Header/>
+                <Body/>
+            </div>
+        );
+    }; 
 
+    Virtual Dom is js object 
 
+    Diff Algorithm find the difference between updated virtual dom and previous virtual dom 
 
+    Supose old virtual dom contains 7 Resturant Card and after clicking the button updated virtual dom contains 3 resturants card then what Diff algorithm do it calculate the difference(which is 4 resturants card) and then it will actually update the DOM on every render cycle 
+    When something changes in ui this is called reconcilation . In React16 An algorithm known as ReactFiber came it give you the new way to find the difference and update the DOM
+    Diff Algorithm finds out the difference between the old and new object then it updates the actual dom that is why react is faster 
+    Finding out the difference between two html code is tough but finding out the difference between the two objects is fast because js is fast
 
+    whatever you see in the ui React keeps a track of all these html or dom elements as a virtual Dom(it's kind a object representation of whole actual dom). as soon as we clicked that button a new object is formed then it finds out the differenece between these two objects and then it actually updates the dom
 
-    
+    React constantly monitoring the listOFResturants(state Variable) why react do this because we use useState to create this listOFResturants . React Monitor the listOFResturants as soon as listOFResturants changes it findout the diff and update the ui . React do this update very efficiently that is the core job of React. as soon as we call the setlistOFResturants react find out the diff and update the ui this is the core job of React 
+
+    const [listOfResturants,setlistOfResturants] = useState(resList) why their are two things why we can't just modify directly because their need to be triggered to start the diff algorithm and update the ui that why we create the setlistOfResturants second function whenever you call the second function it automatically updates the ui 
+
+    useState() this function returns the array so const [listOfResturants,setlistOfResturants] = useState(resList) this can also be written as 
+    const array = useState(resList);
+    array[0] = listOfResturants;
+    array[1] = setlistOfResturants;
+
+    OR 
+
+    it can also be written as 
+    const arr = useState(resList);
+    const [listOfResturants,setlistOfResturants] = arr; // this is destructuring on fly
